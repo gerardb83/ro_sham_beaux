@@ -3,15 +3,13 @@
     <head>
         <title>Ro Sham Beaux</title>
     </head>
-    <body>
-        
+    <body>  
     </body>
 
+ <!--JavaScript begins-->
     <script>
         const choices = ['rock', 'paper', 'scissors']
-        let score = {player: 0, cpu: 0 , rounds: 1};
-       
-        
+        let score = {player: 4, cpu: 0 , rounds: 1};    
 
 /// Part 3. -- Computer Selection        
             function computerPlay() {
@@ -35,21 +33,21 @@
                 
             ///Functions defining what happens at each outcome
                         function youTie() {
-                            score.round += 1;
+                            score.rounds += 1;
                             console.log("Tie! Double " + playerSelection + "s! Go again!");
                             return game();
                         }
 
                         function youWin() {
                             score.player += 1;
-                            score.round += 1;
+                            score.rounds += 1;
                             console.log("You win! " + playerSelection + " beats " + computerSelection + "!")
                             return game();
                         }
 
                         function youLose() {
                             score.cpu += 1;
-                            score.round += 1;
+                            score.rounds += 1;
                             console.log("You lose! " + computerSelection + " beats " + playerSelection + "!")
                             return game();
                         }
@@ -78,21 +76,7 @@
             }
         }
 
-    /// Reset and Endgame functions
-            function reset() {
-                    let score = { player: 0, cpu: 0, rounds: 1};
-            }
-                
-            function endGame() {
-                if (score.player === 5) {
-                    console.log("YOU WIN!!! Your kind shall be suffered to survive, for now...")
-                } else if (score.cpu === 5) {
-                    console.log("LOSER! Truely the machines shall inherit the earth, mortal fool!")
-                }
-                console.log("Play again?")        
-            }
-
-/// The shell of the game itself    
+ /// Part 5: The shell of the game itself    
     function game() {
         console.log("Round: " + score.rounds + " Human: " + score.player + "; Machine: " + score.cpu)
         if (score.player === 5 || score.cpu === 5) {
@@ -101,6 +85,38 @@
              playRound();
          }
     }
-        
+ 
+         /// reset, again endGame functions
+                function reset() {
+                        score.player = 0;
+                        score.cpu = 0;
+                        score.rounds = 0;
+                }
+                
+                function again(playAgain) {
+                        playAgain = prompt("Play again?").toLowerCase();
+                        if (playAgain === "y" || "yes") {
+                            reset();
+                            game();
+                        } else if (playAgain === "n" || "no") {
+                            goodbye();
+                        } else {
+                            again();
+                        }
+                }
+                
+            function endGame() {
+                if (score.player === 5) {
+                    console.log("YOU WIN!!! Your kind shall be suffered to survive, for now...")
+                } else {
+                    console.log("LOSER! Truely the machines shall inherit the earth, mortal fool!")
+                } 
+                again();
+            }    
+
+            function goodbye() {
+                console.log("Goodbye!");
+            }
+
     </script>
 </html>
